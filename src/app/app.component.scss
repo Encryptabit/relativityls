@@ -1,0 +1,9 @@
+:host ::ng-deep .primary-gradient {
+  color: white;
+  background: linear-gradient(
+    90deg,
+    rgba(47, 3, 54, 1) 46%,
+    rgba(108, 19, 92, 1) 75%,
+    rgba(108, 19, 92, 1) 100%
+  );
+}
