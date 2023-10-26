@@ -101,6 +101,8 @@ export class LicenseTableDataSource extends DataSource<License> {
           return compare(a.LicenseHandle, b.LicenseHandle, isAsc);
         case 'ProgramStartDate':
           return compare(a.ProgramStartDate, b.ProgramStartDate, isAsc);
+        case 'Duration':
+          return compare(a.ProgramStartDate, b.ProgramStartDate, isAsc);
         default:
           return 0;
       }

@@ -37,6 +37,7 @@ export class LicenseTableComponent implements AfterViewInit, OnInit {
     'FeatureVersion',
     'LicenseHandle',
     'ProgramStartDate',
+    'Duration',
   ];
 
   constructor(private licenseService: LicenseService) {}
