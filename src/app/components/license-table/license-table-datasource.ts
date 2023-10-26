@@ -18,7 +18,10 @@ export class LicenseTableDataSource extends DataSource<License> {
 
   private licensesSubject = new BehaviorSubject<License[]>([]);
 
-  constructor(private licenseService: LicenseService) {
+  constructor(
+    private licenseService: LicenseService,
+    private dataIteration?: string
+  ) {
     super();
   }
 
@@ -106,17 +109,10 @@ export class LicenseTableDataSource extends DataSource<License> {
 
   public loadLicenses() {
     this.licenseService
-      .getLicenseInformation('data.json')
+      .getLicenseInformation(`data${this.dataIteration}.json`)
       .pipe(tap((value: License[]) => (this.data = [...this.data, ...value])))
       .subscribe((result) => {
         this.licensesSubject.next(result as License[]);
-      });
-
-    this.licenseService
-      .getLicenseInformation('data2.json')
-      .pipe(tap((value: License[]) => (this.data = [...this.data, ...value])))
-      .subscribe((result) => {
-        this.licensesSubject.next(result);
       });
   }
 }

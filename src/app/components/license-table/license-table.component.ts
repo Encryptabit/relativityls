@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatTable } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -17,6 +23,8 @@ export class LicenseTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<License>;
   dataSource: LicenseTableDataSource;
+  @Input({ transform: (value: number) => value.toString() })
+  dataSourceIteration: string = '';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = [
@@ -34,7 +42,10 @@ export class LicenseTableComponent implements AfterViewInit, OnInit {
   constructor(private licenseService: LicenseService) {}
 
   ngOnInit(): void {
-    this.dataSource = new LicenseTableDataSource(this.licenseService);
+    this.dataSource = new LicenseTableDataSource(
+      this.licenseService,
+      this.dataSourceIteration
+    );
     this.dataSource.loadLicenses();
   }
 
@@ -43,7 +54,10 @@ export class LicenseTableComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
 
-    this.paginator.page.pipe(tap(() => this.loadLicensesPage())).subscribe();
+    this.paginator.page
+      .pipe(tap(() => this.loadLicensesPage()))
+      .subscribe()
+      .unsubscribe();
   }
 
   loadLicensesPage() {

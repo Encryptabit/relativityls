@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashComponent } from './components/dash/dash.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashComponent },
+  { path: '', redirectTo: '/licenses', pathMatch: 'full' },
+  { path: 'licenses', component: DashComponent },
 ];
 
 @NgModule({
