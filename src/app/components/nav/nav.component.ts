@@ -10,7 +10,7 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class NavComponent {
   private breakpointObserver = inject(BreakpointObserver);
-  public menuItems = ['dashboard'];
+  public menuItems = ['Licenses'];
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
